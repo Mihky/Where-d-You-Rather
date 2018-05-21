@@ -19,6 +19,8 @@ public class SearchYelpAPI extends HttpServlet {
       throws IOException {
 
     response.setContentType("text/plain");
+    response.addHeader("Access-Control-Allow-Origin", "*");
+    response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD");
 
     String query_url = SEARCH_ENDPOINT + "?term=food&open_now=true&longitude=" + "-118.48207" + "&latitude=" + "34.029414";
     URL url = new URL(query_url);

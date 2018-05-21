@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'AvenirNext', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#searchBar {
+  margin: auto;
+}
+
+.button {
+  height: 56px;
+  width: 75px;
+  cursor: pointer;
+}
+
+.location-search-input {
+  width: 100%;
+  height: 50px;
+  max-width: 500px;
+  position: relative;
+}
+
+.remove-border {
+  outline: none;
+}
+
+.autocomplete-dropdown-container {
+  border-bottom: honeydew;
+  border-left: honeydew;
+  border-right: honeydew;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 0 0 2px 2px;
+  width:500px;
+}
+
+.card {
+  /* background-color: honeydew; */
+  border-radius: 30px;
+  box-shadow: 5px 3px 20px 0 rgba(0,0,0,0.17);
+  height: 750px;
+  width: 500px;
+  text-align: left;
+  /* TODO: Delete this part */
+  margin-left: 100px;
+  margin-bottom: 50px;
+}
+
+.card:hover {
+  box-shadow: 5px 3px 50px 0 rgba(0,0,0,0.28);
+  cursor: pointer;
+}
+
+.card-image {
+  height: 50%;
+  width: 100%;
+  border-radius: 30px;
+  /* TODO: make sure image scales and fills up the space */
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stars-container {
+  /* TODO: make sure stars aren't too big */
+}
+
+.text-margin {
+  margin-left: 20px;
+}
+
+.text-style {
+  font-size: 16px;
+}
+
+.yelp-theme {
+  background-color: #d32323;
+  color: white;
+}
+
+.yelp-theme-foreground {
+  color: #d32323;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-horizontally-center {
+  justify-content: center;
+}
+
+.flex-vertically-center {
+  align-items: center;
+}
