@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchComponent from './components/searchbox.js';
-// import Card from './components/card.js';
 import CardDuel from './components/duel.js';
+import Winner from './components/winner.js';
 import FaYelp from 'react-icons/lib/fa/yelp';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -73,9 +73,13 @@ class App extends Component {
   }
 
   makeCard(businessIndex, businessData) {
+    var categories = [];
+    for (var index = 0; index < businessData.categories.length; index++) {
+      categories.push(businessData.categories[index]['title']);
+    }
     return {
       address: businessData.location['display_address'],
-      categories: businessData.categories,
+      categories: categories,
       distance: businessData.distance,
       imageUrl: businessData.image_url,
       index: businessIndex,
@@ -127,7 +131,14 @@ class App extends Component {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
     } else {
-      axios.get('https://whered-you-rather.appspot.com/queryYelpAPI')
+      var route = 'https://whered-you-rather.appspot.com/queryYelpAPI';
+      alert(route);
+      axios.get(route, {
+        params: {
+          longitude: longitude,
+          latitude: latitude,
+        }
+      })
         .then((response) => {
           console.log(response);
           var businesses = response.data['businesses'];
@@ -135,6 +146,7 @@ class App extends Component {
             businesses = businesses.slice(0, 10);
             this.init(businesses);
             // TODO: route game
+            // this.props.history.push('/play');
           } else {
             // TODO: Error Toast saying not enough businesses around that location
           }
@@ -151,16 +163,23 @@ class App extends Component {
     if (nextBusiness.done) {
       // route to winner page
       alert('ROUTE TO DONE PAGE BRO');
+      this.context.router.push({
+        pathname: '/winner',
+        // TODO: Fix this to separate out all the attributes instead of keep all in one dict and store to data
+        data: {email: index === 0 ? this.state.leftCard.value : this.state.rightCard.value},
+      });
     }
 
-    if (index === 0) {
+    // Keep the Right Card and replace the left card with a new choice
+    if (index === 1) {
       this.setState({
         leftCard: {
           done: nextBusiness.done,
           businessIndex: nextBusiness.businessIndex,
           value: this.makeCard(nextBusiness.businessIndex, nextBusiness.value)},
       });
-    } else {
+    // Keep the Left Card and replace the right card with a new choice
+    } else if (index === 0) {
       this.setState({
         rightCard: {
           done: nextBusiness.done,
@@ -223,7 +242,18 @@ class App extends Component {
         rightYelpUrl: "https://www.yelp.com/biz/umami-burger-santa-monica-santa-monica",
       };
     }
-
+    var winnerProps = {
+      address: "13425 Washington Blvd Marina Del Rey, CA 90292",
+      categories: ["Burgers", "Fast Food"],
+      distance: 1000,
+      imageUrl: "https://s3-media1.fl.yelpcdn.com/bphoto/ZtZKp_ViQOom6hC399UVNA/348s.jpg",
+      name: "In-N-Out Burger",
+      phone: "(800) 786-1000",
+      rating: "4",
+      price:"$",
+      reviewCount:"520",
+      yelpUrl: "https://www.yelp.com/biz/in-n-out-burger-marina-del-rey",
+    };
     return (
       <div className="App">
         <header className="App-header flex-container flex-horizontally-center flex-vertically-center">
@@ -232,6 +262,7 @@ class App extends Component {
         </header>
         <SearchComponent onClick={(valid, lon, lat) => this.queryYelpForBusinesses(valid, lon, lat)}></SearchComponent>
         <CardDuel {...props} onClick={(index) => this.handleCardClick(index)}/>
+        <Winner {...winnerProps}/>
       </div>
     );
   }
