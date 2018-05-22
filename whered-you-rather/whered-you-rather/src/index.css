@@ -67,6 +67,14 @@ body {
   /* TODO: make sure stars aren't too big */
 }
 
+.winner-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .text-margin {
   margin-left: 20px;
 }
