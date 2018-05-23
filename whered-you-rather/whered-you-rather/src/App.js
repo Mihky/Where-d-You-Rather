@@ -163,11 +163,11 @@ class App extends Component {
     if (nextBusiness.done) {
       // route to winner page
       alert('ROUTE TO DONE PAGE BRO');
-      this.context.router.push({
+      this.props.history.push({
         pathname: '/winner',
-        // TODO: Fix this to separate out all the attributes instead of keep all in one dict and store to data
-        data: {email: index === 0 ? this.state.leftCard.value : this.state.rightCard.value},
-      });
+        state: {cardData: index === 0 ? this.state.leftCard.value : this.state.rightCard.value},
+      })
+      return;
     }
 
     // Keep the Right Card and replace the left card with a new choice
@@ -262,7 +262,6 @@ class App extends Component {
         </header>
         <SearchComponent onClick={(valid, lon, lat) => this.queryYelpForBusinesses(valid, lon, lat)}></SearchComponent>
         <CardDuel {...props} onClick={(index) => this.handleCardClick(index)}/>
-        <Winner {...winnerProps}/>
       </div>
     );
   }
