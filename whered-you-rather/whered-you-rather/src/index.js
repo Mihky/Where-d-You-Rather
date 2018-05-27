@@ -10,8 +10,9 @@ import Winner from './components/winner.js';
 ReactDOM.render(
   (<BrowserRouter>
     <Switch>
-      <Route path="/" component={App}/>
+      <Route exact path="/" component={App}/>
       <Route path="/winner" component={Winner}/>
+      <Route path="/play" component={CardDuel}/>
     </Switch>
   </BrowserRouter>),
   document.getElementById('root')

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
 import axios from 'axios'
 
@@ -101,12 +101,6 @@ export class SearchComponent extends Component {
           <FaMapMarker size={35} />
         </button>
       </div>
-
-      // <form onSubmit={this.handleSubmit}>
-      //   <input id="pacInput" type="text" value={this.state.address} onChange={this.handleChange}/>
-      //   <FaMapMarker type="submit"/>
-      //   <input type="submit" value="Submit" ></input>
-      // </form>
     );
   }
 }

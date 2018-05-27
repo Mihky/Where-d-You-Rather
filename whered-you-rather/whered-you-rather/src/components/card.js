@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import FaStar from 'react-icons/lib/fa/star';
 import FaStarO from 'react-icons/lib/fa/star-o';
 import FaStarHalfEmpty from 'react-icons/lib/fa/star-half-empty';
@@ -10,11 +11,16 @@ import FaCutlery from 'react-icons/lib/fa/cutlery';
 import FaYelp from 'react-icons/lib/fa/yelp';
 
 export class Card extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   convertDistance(distance) {
     return (Number(distance) / 1609.34).toFixed(2);
   }
 
   priceRange(price) {
+    console.log(price);
     if (price.length === 1) {
       return "Under $10";
     } else if (price.length === 2) {
@@ -28,7 +34,9 @@ export class Card extends Component {
 
   render() {
     const ICON_SIZE = 25;
-
+    console.log('in card');
+    console.log(this);
+    console.log(this.props);
     return (
         <div className="card" onClick={this.props.onClick}>
           <img className="card-image" src={this.props.image_url} alt="Business Thumbnail" />
@@ -67,7 +75,9 @@ export class Card extends Component {
             <FaCutlery size={ICON_SIZE} />
             <div className="text-margin">{this.props.categories.join(", ")}</div>
           </div>
-
+          <Button bsStyle="danger" bsSize="large" href={this.props.yelp_url} className="flex-horizontally-center">
+            View On <FaYelp size={ICON_SIZE} />
+          </Button>
           <div className="flex-container text-margin">
             <FaYelp size={ICON_SIZE} />
             <div className="text-margin"><a href={this.props.yelp_url}>Find On Yelp</a></div>
@@ -103,6 +113,7 @@ function Rating(props) {
 }
 
 function PriceRange(props) {
+  console.log(props);
   var price = props.price;
   var dollarSigns = [];
   const DOLLAR_SIZE = 25;

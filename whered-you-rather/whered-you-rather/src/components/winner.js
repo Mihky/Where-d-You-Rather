@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Card from './card.js';
-import Confetti from 'react-dom-confetti';
+import ConfettiCanvas from 'react-confetti-canvas';
+import Header from './header.js';
 
 export class Winner extends Component {
   render() {
+    const { cardData } = this.props.location.state;
     const config = {
       angle: 90,
       spread: 45,
@@ -11,22 +13,25 @@ export class Winner extends Component {
       elementCount: 50,
       decay: 0.9
     };
+
     return (
-      <div className="winner-container">
-        <Confetti active={true} config={config} />
-        <h1>Winner</h1>
-        <Card onClick={() => this.props.onClick(0)}
-          address={this.props.address}
-          categories={this.props.categories}
-          distance={this.props.distance}
-          image_url={this.props.imageUrl}
-          name={this.props.name}
-          phone_number={this.props.phone}
-          price={this.props.price}
-          rating={this.props.rating}
-          review_count={this.props.reviewCount}
-          yelp_url={this.props.yelpUrl}
-        />
+      <div className="page-container">
+        <Header />
+        <div className="winner-container">
+          <h1>Winner</h1>
+          <Card onClick={() => this.props.onClick(0)}
+            address={cardData.address}
+            categories={cardData.categories}
+            distance={cardData.distance}
+            image_url={cardData.imageUrl}
+            name={cardData.name}
+            phone_number={cardData.phone}
+            price={cardData.price}
+            rating={cardData.rating}
+            review_count={cardData.reviewCount}
+            yelp_url={cardData.yelpUrl}
+          />
+        </div>
       </div>
     );
   }
