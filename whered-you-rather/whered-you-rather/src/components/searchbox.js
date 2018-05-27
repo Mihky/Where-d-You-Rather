@@ -101,12 +101,6 @@ export class SearchComponent extends Component {
           <FaMapMarker size={35} />
         </button>
       </div>
-
-      // <form onSubmit={this.handleSubmit}>
-      //   <input id="pacInput" type="text" value={this.state.address} onChange={this.handleChange}/>
-      //   <FaMapMarker type="submit"/>
-      //   <input type="submit" value="Submit" ></input>
-      // </form>
     );
   }
 }

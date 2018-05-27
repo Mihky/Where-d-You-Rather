@@ -12,6 +12,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path="/" component={App}/>
       <Route path="/winner" component={Winner}/>
+      <Route path="/play" component={CardDuel}/>
     </Switch>
   </BrowserRouter>),
   document.getElementById('root')
