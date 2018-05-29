@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
-import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import FaMapMarker from 'react-icons/lib/fa/map-marker';
-import axios from 'axios'
-
-// import google from ''
 
 export class SearchComponent extends Component {
   constructor (props) {

@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchComponent from './components/searchbox.js';
-import CardDuel from './components/duel.js';
-import Winner from './components/winner.js';
-import Header from './components/header.js';
 import FaYelp from 'react-icons/lib/fa/yelp';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   canPlay(businesses) {
     return businesses.length >= 5;
   }
@@ -35,10 +28,10 @@ class App extends Component {
         .then((response) => {
           var businesses = response.data['businesses'];
           if (this.canPlay(businesses)) {
-            businesses = businesses.slice(0, 10);
+            var randomizedBusinesses = getRandomList(businesses)
             this.props.history.push({
               pathname: '/play',
-              state: {businesses: businesses},
+              state: {businesses: randomizedBusinesses},
             })
           } else {
             // TODO: Error Toast saying not enough businesses around that location
@@ -61,6 +54,24 @@ class App extends Component {
       </div>
     );
   }
+}
+
+function getRandomList(items) {
+  var newItems = [];
+  var iters = 0;
+  if (items.length < 10) {
+    iters = items.length;
+  } else {
+    iters = 10;
+  }
+
+  for(var i = 0; i < iters; i++) {
+      var idx = Math.floor(Math.random() * items.length);
+      newItems.push(items[idx]);
+      items.splice(idx, 1);
+  }
+
+  return newItems;
 }
 
 export default App;
