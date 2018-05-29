@@ -5,47 +5,24 @@ import Header from './header.js';
 export class CardDuel extends Component {
   constructor(props) {
     super(props);
-
-    const { businesses } = this.props.location.state;
-    var businessIterator = this.makeIterator(businesses);
-    var firstCard = businessIterator.next();
-    var secondCard = businessIterator.next();
-
     this.state = {
-      businessIterator: businessIterator,
-      isPlaying: true,
-      leftCard: {
-        done: firstCard.done,
-        businessIndex: firstCard.businessIndex,
-        value: this.makeCard(firstCard.businessIndex, firstCard.value),
-      },
-      rightCard: {
-        done: secondCard.done,
-        businessIndex: secondCard.businessIndex,
-        value: this.makeCard(secondCard.businessIndex, secondCard.value),
-      },
-    };
-    console.log(this.state);
-    // this.state = {
-    //   businesses: [],
-    //   isPlaying: false,
-    //   leftCard: {
-    //   },
-    //   rightCard: {
-    //   },
-    // }
+      businesses: [],
+      isPlaying: false,
+      leftCard: null,
+      rightCard: null,
+    }
   }
 
-  // componentWillMount() {
-  //   const { businesses } = this.props.location.state;
-  //   this.init(businesses);
-  // }
+  componentWillMount() {
+    const { businesses } = this.props.location.state;
+    this.init(businesses);
+  }
 
   init(businesses) {
     var businessIterator = this.makeIterator(businesses);
     var firstCard = businessIterator.next();
     var secondCard = businessIterator.next();
-    console.log(this.state);
+
     this.setState({
       businessIterator: businessIterator,
       isPlaying: true,
@@ -90,29 +67,6 @@ export class CardDuel extends Component {
       }
     };
   }
-
-  // initCard() {
-  //   return {
-  //     address: "",
-  //     categories: [],
-  //     distance: 0,
-  //     imageUrl: "",
-  //     index: 0,
-  //     name: "",
-  //     phone: "",
-  //     price: "",
-  //     rating: "",
-  //     reviewCount: "",
-  //     yelpUrl: "",
-  //   }
-  // }
-
-  // isGameOver() {
-  //   if (this.state.leftCard.done || this.state.rightCard.done) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   makeCard(businessIndex, businessData) {
     var categories = [];
@@ -172,7 +126,7 @@ export class CardDuel extends Component {
     return (
       <div className="page-container">
         <Header />
-        <div className="card-container">
+        <div className="content-container card-container">
           <Card onClick={() => this.handleCardClick(0)}
             address={leftCard.address}
             categories={leftCard.categories}
