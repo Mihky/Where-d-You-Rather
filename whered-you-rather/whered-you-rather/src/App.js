@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchComponent from './components/searchbox.js';
 import FaYelp from 'react-icons/lib/fa/yelp';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios'
+import axios from 'axios';
+import Notifications, {notify} from 'react-notify-toast';
 
 class App extends Component {
   canPlay(businesses) {
@@ -13,10 +14,7 @@ class App extends Component {
 
   queryYelpForBusinesses(isValidAddress, longitude, latitude) {
     if (!isValidAddress) {
-      // TODO: Show toast
-      toast("Custom Style Notification with css class!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
+      notify.show("Address Not Valid", "error", 1000);
     } else {
       var route = 'https://whered-you-rather.appspot.com/queryYelpAPI';
       axios.get(route, {
@@ -34,7 +32,7 @@ class App extends Component {
               state: {businesses: randomizedBusinesses},
             })
           } else {
-            // TODO: Error Toast saying not enough businesses around that location
+            notify.show("Not Enough Businesses Found", "error", 1000);
           }
         })
         .catch(function (error) {
@@ -46,6 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="App flex-vertically-center">
+        <Notifications />
         <div className="flex-container flex-horizontally-center">
           <div className="App-home">{"Where'd You Rather"}</div>
           <FaYelp className="App-logo yelp-theme-foreground" alt="logo" size={70} />

@@ -3,6 +3,12 @@ import Card from './card.js';
 import Header from './header.js';
 
 export class Winner extends Component {
+  componentWillMount() {
+    if (this.props.history.action === 'POP') {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
     const { cardData } = this.props.location.state;
 

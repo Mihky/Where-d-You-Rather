@@ -14,6 +14,10 @@ export class CardDuel extends Component {
   }
 
   componentWillMount() {
+    if (this.props.history.action === 'POP') {
+      this.props.history.push('/');
+    }
+
     const { businesses } = this.props.location.state;
     this.init(businesses);
   }

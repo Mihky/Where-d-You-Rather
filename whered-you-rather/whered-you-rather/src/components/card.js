@@ -29,6 +29,10 @@ export class Card extends Component {
     }
   }
 
+  disableNormalClickBehavior(e) {
+    e.stopPropagation();
+  }
+
   render() {
     const ICON_SIZE = 25;
 
@@ -37,7 +41,7 @@ export class Card extends Component {
           <img className="card-image" src={this.props.image_url} alt="Business Thumbnail" />
           <h1 className="text-margin">{this.props.name}</h1>
 
-          <div className="flex-container">
+          <div className="flex-container flex-vertically-center">
             <div className="stars-container text-margin">
               <Rating rating={this.props.rating} />
             </div>
@@ -46,34 +50,34 @@ export class Card extends Component {
             </div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <PriceRange price={this.props.price} />
             <div className="text-margin">{this.priceRange(this.props.price)}</div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <FaPhone size={ICON_SIZE} />
             <div className="text-margin">{this.props.phone_number}</div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <FaMapPin size={ICON_SIZE} />
             <div className="text-margin">{this.props.address.join(", ")}</div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <FaRoad size={ICON_SIZE} />
             <div className="text-margin">{this.convertDistance(this.props.distance)} miles away</div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <FaCutlery size={ICON_SIZE} />
             <div className="text-margin">{this.props.categories.join(", ")}</div>
           </div>
 
-          <div className="flex-container text-margin">
+          <div className="flex-container flex-vertically-center text-margin">
             <FaYelp size={ICON_SIZE} />
-            <div className="text-margin"><a href={this.props.yelp_url}>Find On Yelp</a></div>
+            <div className="text-margin" onClick={this.disableNormalClickBehavior}><a style={{display: "table-cell"}} href={this.props.yelp_url} target="_blank">Find On Yelp</a></div>
           </div>
         </div>
     );
