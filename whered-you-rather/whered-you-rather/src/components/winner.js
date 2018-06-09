@@ -17,7 +17,7 @@ export class Winner extends Component {
         <Header />
         <div className="content-container winner-container">
           <h1>Winner</h1>
-          <Card onClick={() => this.props.onClick(0)}
+          <Card className="non-clickable"
             address={cardData.address}
             categories={cardData.categories}
             distance={cardData.distance}
