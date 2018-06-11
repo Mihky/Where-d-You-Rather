@@ -16,7 +16,7 @@ class App extends Component {
     if (!isValidAddress) {
       notify.show("Address Not Valid", "error", 1000);
     } else {
-      var route = 'https://whered-you-rather.appspot.com/queryYelpAPI';
+      var route = 'https://server-dot-whered-you-rather.appspot.com/queryYelpAPI';
       axios.get(route, {
         params: {
           longitude: longitude,

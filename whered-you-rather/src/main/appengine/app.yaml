@@ -1,6 +1,7 @@
 runtime:    java
 env:        flex
 threadsafe: true
+service: server
 
 handlers:
 - url: /.*
